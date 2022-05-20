@@ -1,0 +1,81 @@
+.mat-icon {
+
+  vertical-align: middle;
+
+  margin-right: 20px;
+
+}
+
+
+img { width: 70px;
+
+      height: 70px;
+
+      object-fit:cover;
+
+      border-radius: 50%;
+
+      margin-bottom: 20px;
+  }
+
+.mat-list-item{
+
+/* color: aliceblue;*/
+
+
+
+color: rgb(34, 33, 33);
+
+}
+
+.side-list{
+
+margin: 15px 0px 15px 0px;
+
+}
+
+.mat-divider {
+
+/*border-top-color: rgb(236, 236, 236);*/
+
+border-top-color: rgb(34, 33, 33);
+
+
+
+margin: 0px 10px;
+
+}
+
+.center{display:flex;
+
+    align-items:center;
+
+    justify-content:center; }
+
+
+    .content{
+      font-style: italic;
+      font-size: 12px;
+      position: absolute;
+      bottom: 0;
+
+  }
+  .mat-expansion-panel {
+    
+    background: none;
+    display:inline;
+
+  }
+  .gestion{
+    font-size: 13px; 
+   margin-left: 5px;
+  }
+  .mat-expansion-panel-header
+  {
+    margin-left: -25px;
+  }
+  
+
+
+
+  

@@ -1,0 +1,272 @@
+<mat-form-field appearance="standard" class="search-bar">
+  <input
+  type="text"id="filter-text-box" matInput placeholder="Chercher..."(input)="onFilterTextBoxChanged()"
+  />
+  </mat-form-field>
+
+  <div class="buttons">
+    <button class="creer"mat-raised-button style="margin-left: 7px;" (click)="open1(content2)">
+      <mat-icon>add</mat-icon>
+    {{id}}
+    </button>
+  
+   
+    <div class="horizontalgap" style="width:10px"></div>
+      
+    <button mat-raised-button style="margin-left: 7px;"   (click)="openDelete(contentDelete,data)" >
+      <mat-icon class="icon">delete</mat-icon>
+    </button>
+  
+    <div class="horizontalgap" style="width:10px"></div>
+  
+    <button mat-raised-button [disabled]="procSlected.length === 0" style="margin-left: 7px;"  (click)="open(content)">
+      Affecter à
+    </button>
+  
+    <div style="clear:both;"></div>
+  
+   
+  </div>
+  
+ 
+    
+  <ag-grid-angular 
+    style="width: 100.7%; height: 90%;  margin-top: 6px;" 
+    class="ag-theme-alpine"
+    id="myGrid"
+    [rowData]="data" 
+    [columnDefs]="columnDefs"
+    [defaultColDef]="defaultColDef"
+    [animateRows]="true"
+    [columnHoverHighlight]="false"
+    [pagination]="true"
+    [paginationPageSize]="paginationPageSize"
+    [rowSelection]="rowSelection"
+    [enableFillHandle]="true" 
+    [cacheQuickFilter]="true"
+    (cellValueChanged)="onRowDataChange($event)"
+    (rowSelected)="onRowSelected($event)"
+    (gridReady)="onGridReady($event)"
+    >
+  </ag-grid-angular>
+  
+
+  <ng-template #content let-c="close" let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Choisir un produit</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="mb-3">
+          <label for="name" class="form-label" style="padding-left:10px;padding-top: 10px;" class="change-font2">Nom Produit</label>
+          <select  name="name" required  class="form-control" multiple>
+            <option *ngFor="let prod of products" [ngValue]="prod" (click)="getElement(prod)">
+              {{prod.name}}
+            </option>
+          </select>
+        </div>
+          <div  class="modal-footer" >
+            <div mat-dialog-actions [align]="'end'">
+              <button style="margin-right: 3px;background-color: #05a7a7;" data-dismiss="modal" mat-raised-button color="primary" (click)="affecterA()" >Enregistrer</button>
+              <button mat-raised-button color="warn" (click)="modal.close('Save click')">Annuler</button>
+            </div>
+          </div>
+      </form>
+    </div> 
+  </ng-template>
+
+
+
+
+  <ng-template #content2 let-c="close" let-modal >
+  <div class="addproc">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title" style="font-weight:bold;margin-bottom:2px;font-size:20px">Ajouter une Procédure</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <form [formGroup]="procedureDetail" >
+      <div class="rowleft">
+        <div class="mb-3">
+           <label for="Nom" class="form-label" class="change-font2">Procedure</label>
+           <input required type="text"  class="form-control" placeholder="NEWPORT." formControlName="name"> 
+        </div>
+        <div class="mb-3">
+            <label for="ProfilProc" class="form-label" class="change-font2">profilProc</label>
+            <select name="ProfilProc" required  class="form-control" formControlName="profilProc" >
+            <option value="" disabled selected>--Veuillez choisir une option--</option>
+            <option *ngFor="let Profil of profilProcs" [ngValue]="Profil">
+              {{Profil}}
+            </option>
+            </select>
+        </div>
+        <div class="mb-3">
+          <label for="Traitement" class="form-label" class="change-font2">Traitement </label>
+          <input required type="text" class="form-control" placeholder="--Traitement--" formControlName="traitement">
+        </div>
+        <div class="mb-3">
+            <label for="Priorite" class="form-label" class="change-font2">Priorite</label>
+            <select name="ProfilProc" required  class="form-control" formControlName="prio" >
+            <option value="" disabled selected>--Veuillez choisir une option--</option>
+            <option *ngFor="let prio of priorites" [ngValue]="prio">
+              {{prio}}
+            </option>
+            </select>
+        </div>
+        <div class="mb-3">
+          <label for="Scrum" class="form-label" class="change-font2">Scrum</label>
+          <select name="ProfilProc" required  class="form-control" formControlName="scrum">
+          <option value="" disabled selected>--Veuillez choisir une option--</option>
+          <option *ngFor="let s of scrum" [ngValue]="s">
+            {{s}}
+          </option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="Sprint" class="form-label" class="change-font2">Sprint</label>
+          <input required type="text"  class="form-control"  placeholder="--Sprint--" formControlName="sprint" >
+        </div>
+        <div class="mb-3">
+          <label for="PrdSp" class="form-label" class="change-font2">PrdSp</label>
+          <select name="PrdSp" required  class="form-control" formControlName="prdSp">
+          <option value="" disabled selected>--Veuillez choisir une option--</option>
+          <option *ngFor="let s of prdSps" [ngValue]="s">
+            {{s}}
+          </option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="Couverture" class="form-label" class="change-font2">Couverture</label>
+          <select name="Couverture" required  class="form-control" formControlName="couverture">
+            <option value="" disabled selected>--Veuillez choisir une option--</option>
+            <option *ngFor="let c of couvertures" [ngValue]="c" >{{c}}</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="Nom" class="form-label" class="change-font2">Commentaire</label>
+          <input required type="text" style="height:110px ;" class="form-control" placeholder="Commentaire"
+           formControlName="commentaireMig"> 
+       </div>
+       <div class="mb-3">
+        <label for="JiraQa" class="form-label" class="change-font2">Date</label>
+        <input required type="text"  class="form-control"  placeholder="Date" formControlName="dateMAJ" >
+      </div>
+      </div>
+
+      <div class="rowdivider">
+        <mat-divider vertical></mat-divider>
+     </div>
+ 
+      <div class="rowright">
+        <div class="mb-3">
+          <label for="JiraDev" class="form-label" class="change-font2">JiraDev</label>
+          <input required type="text"  class="form-control"  placeholder="JiraDev" formControlName="jiraDev">
+        </div>
+        <div class="mb-3">
+          <label for="JiraQa" class="form-label" class="change-font2">QuiDev</label>
+          <input required type="text"  class="form-control"  placeholder="QuiDev" formControlName="quiDev" >
+        </div>
+        <div class="mb-3">
+          <label for="StatutDev" class="form-label" class="change-font2">StatutDev</label>
+          <select name="StatutDev" required  class="form-control" formControlName="statutDev">
+            <option value="" disabled selected>--Veuillez choisir une option--</option>
+            <option *ngFor="let statut of statuts" [ngValue]="statut">
+              {{statut}}
+            </option>
+          </select>
+          </div>
+        <div class="mb-3">
+          <label for="QuiQa" class="form-label" class="change-font2">JiraQa</label>
+          <input required type="text"  class="form-control"  placeholder="JiraQa" formControlName="jiraQa"> 
+        </div>
+        <div class="mb-3">
+          <label for="QuiDev" class="form-label" class="change-font2">QuiQa</label>
+          <input required type="text"  class="form-control"  placeholder="QuiQa" formControlName="quiQa">
+        </div>
+       <div class="mb-3">
+          <label for="StatutQa" class="form-label" class="change-font2">StatutQa</label>
+          <select name="StatutQa" required  class="form-control" formControlName="statutQa">
+            <option value="" disabled selected>--Veuillez choisir une option--</option>
+            <option *ngFor="let statut of statuts" [ngValue]="statut">
+              {{statut}}
+            </option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="Traduction" class="form-label" class="change-font2">Traduction</label>
+          <select name="Traduction" required  class="form-control" formControlName="statutTrad">
+            <option value="" disabled selected>--Veuillez choisir une option--</option>
+            <option *ngFor="let statut of statuts" [ngValue]="statut">
+              {{statut}}
+            </option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="JiraJas" class="form-label" class="change-font2">JiraJas</label>
+          <input required type="text"  class="form-control"  placeholder="--JiraJas--" formControlName="jiraJas">
+        </div>
+        <div class="mb-3">
+          <label for="PrioriteJas" class="form-label" class="change-font2">PrioriteJas</label>
+          <select name="PrioriteJas" required  class="form-control" formControlName="prioJas">
+            <option value="" disabled selected>--Veuillez choisir une option--</option>
+            <option *ngFor="let prio of priorites" [ngValue]="prio">
+              {{prio}}
+            </option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="StatutJas" class="form-label" class="change-font2">StatutJas</label>
+          <select name="StatutJas" required  class="form-control" formControlName="statutJasper">
+            <option value="" disabled selected>--Veuillez choisir une option--</option>
+            <option *ngFor="let statut of statuts" [ngValue]="statut">
+              {{statut}}
+            </option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="Nom" class="form-label" class="change-font2">CommentaireJas</label>
+          <input required type="text" style="height:110px ;" class="form-control" placeholder="Commentaire"
+           formControlName="commentaireJas"> 
+       </div>
+     
+      </div>
+    </form>
+  </div>
+          <div  class="modal-footer" >
+        <div mat-dialog-actions [align]="'end'">
+          <button style="margin-right: 3px; background-color: #05a7a7;" data-dismiss="modal" mat-raised-button color="primary"
+           (click)="addProcedure()">Ajouter</button>
+          <button mat-raised-button color="warn"  (click)="modal.close('Save click')">Annuler</button>
+        </div>
+      </div>
+ </div>
+</ng-template>
+
+    
+<ng-template #contentDelete let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Confirmation de la suppression</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <h2>Êtes-vous sûr de vouloir supprimer ces procédures?</h2>
+    <div class="modal-footer">
+      <button style="margin-right: 3px;background-color: #05a7a7;" data-dismiss="modal" mat-raised-button color="primary" (click)="deleteProcFromProduct()"
+      >Supprimer du produit!</button> <!-- remove proc from product -->
+      <button style="margin-right: 3px;background-color: #05a7a7;" data-dismiss="modal" mat-raised-button color="primary"  (click)="deleteProcFromAll()"
+      >Supprimer des produits!</button> <!-- delete proc -->
+  
+  
+    <button type="button" mat-raised-button color="warn" (click)="modal.close('Save click')">Annuler</button>
+  </div>    </div>
+
+</ng-template>
+

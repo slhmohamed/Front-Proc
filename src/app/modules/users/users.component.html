@@ -1,0 +1,330 @@
+<mat-toolbar>
+    
+    <span>Gestion des utilisateurs</span>
+    <span class="example-spacer"></span>
+    <button mat-raised-button id="greenbuttom"  (click)="openn(content)">Ajouter un utilisateur</button>
+</mat-toolbar> 
+
+  
+
+  <div class="container">
+    <div style="margin-top:10px;">
+      
+      <mat-form-field appearance="standard">
+        <mat-label>chercher</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex: mia" #input>
+      </mat-form-field>
+      
+      
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort class="table-hover">
+      
+          <!-- ID Column -->
+          
+          <ng-container matColumnDef="id" >
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+            <td mat-cell  *matCellDef="let row" id="userid"> {{row.id}} </td>
+          </ng-container> 
+
+         
+      
+      
+          <!-- Name Column -->
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+            <td mat-cell *matCellDef="let row"> {{row.email}} </td>
+          </ng-container>
+      
+          <!-- Fruit Column -->
+          <ng-container matColumnDef="username">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Username </th>
+            <td mat-cell *matCellDef="let row"> {{row.username}} </td>
+          </ng-container>
+
+           <!-- Fruit Column -->
+           <ng-container matColumnDef="roles">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Role</th>
+            <td mat-cell *matCellDef="let row"> {{getRoles(row.roles)}} </td>
+          </ng-container>
+
+          
+           <!-- Fruit Column -->
+           <ng-container matColumnDef="action" >
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
+            <td mat-cell *matCellDef="let row" >
+              
+              <button mat-icon-button color="primary" type="submit" title="Make Admin" (click)="openEdit(contentEdit,row)" [disabled]="username==row.username"> 
+               
+                <mat-icon>edit</mat-icon>
+                
+              </button>
+
+              <button mat-icon-button color="warn"  (click)="open(contentDelete, row.id)" [disabled]="username==row.username"> 
+               
+               
+                <mat-icon>delete</mat-icon>
+                
+              </button> <!--
+              <button mat-icon-button color="primary"  (click)="openDetails(contentDetails, row)" [disabled]="username==row.username"> 
+               
+                <mat-icon>assignment</mat-icon>
+                
+              </button> -->
+             
+            </td>
+          </ng-container>
+      
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+          <!-- Row shown when there is no matching data. -->
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+          </tr>
+
+
+
+      
+         
+        </table>
+      
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+      </div>
+      
+
+    </div>
+  </div>
+
+
+
+  
+  
+  <ng-template #contentDelete let-c="close" let-modal >
+    <div class="modal-header">
+      <h4 class="modal-title" class="change-position" >Confirmation de la suppression</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body" class="text" >
+      <h2 class="change-font">Êtes-vous sûr de vouloir supprimer cet utilisateur ?</h2>
+      <div class="modal-footer">
+        <button  style="margin-right: 3px;background-color: #05a7a7;"data-dismiss="modal"  mat-raised-button color="primary" (click)="c('yes')"
+        >Oui, Supprimer!</button> 
+   
+   
+      <button mat-raised-button color="warn" (click)="c('Save click')">Annuler</button>
+    </div> </div>
+  </ng-template>
+  
+
+
+ 
+
+  <ng-template #content let-c="close" let-modal>
+  <div class="modal-header" >
+    <h4 class="modal-title" class="change-position" style="font-weight:bold;margin-bottom:2px;font-size:20px" >Ajouter un utilisateur</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body" class="text" >
+    <form [formGroup]="userDetail" >
+        <div class="mb-3">
+            <label for="username" class="form-label" style="padding-left:10px;padding-top: 10px;" class="change-font2">Nom utilisateur</label>
+            <input required type="text" formControlName="username" class="form-control"  >
+        </div>
+
+        <div class="mb-3">
+          <label  for="email" class="form-label" class="change-font2" style="padding-left:10px;">Email </label>
+          <input   required type="email" formControlName="email" class="form-control" >
+          
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label" class="change-font2" style="padding-left:10px;">Mot de passe </label>
+            <input  required type="password" formControlName="password"  class="form-control"  >
+          </div>
+    
+          <div class="mb-3">
+            <label for="role"  class="form-label" class="change-font2" style="padding-left:10px;">Role</label>
+           
+            <select  name="role" formControlName="role" required  multiple  [(ngModel)]="user.role" class="form-control">
+              <option *ngFor="let rol of roles" [value]="rol.name">
+                {{rol.name}}
+              </option>
+    
+            </select>
+          </div>
+
+          <div class="alert alert-warning" *ngIf=" isSignUpFailed">
+            Inscription échouée!<br />{{ errorMessage }}
+          </div>
+       
+      </form>
+      <div class="modal-footer">
+        <div mat-dialog-actions [align]="'end'" >
+          <button style="margin-right: 3px;  background-color: #05a7a7;"mat-raised-button color="primary"  data-bs-dismiss="modal" (click)="addUser()">Enregistrer</button>
+          <button mat-raised-button color="warn" mat-dialog-close (click)="c('Save click')" >Annuler</button>
+        </div>
+      </div>
+
+  </div>
+</ng-template> 
+<!--
+<ng-template #content let-c="close" >
+  <div class="modal-header" >
+    <h4 class="modal-title" class="change-position" style="font-weight:bold;margin-bottom:2px;font-size:20px" >Ajouter un utilisateur</h4>
+  </div>
+  <div class="modal-body" class="text" >
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate >
+        <div class="mb-3">
+            <label for="username" class="form-label" style="padding-left:10px;padding-top: 10px;" class="change-font2">Nom utilisateur</label>
+            <input required type="text" id="username" [(ngModel)]="user.username" name="username" class="form-control"  >
+        </div>
+
+        <div class="mb-3">
+          <label  for="email" class="form-label" class="change-font2" style="padding-left:10px;">Email </label>
+          <input   required type="email" name="email" [(ngModel)]="user.email" class="form-control" >
+          
+        </div>
+
+          <div class="mb-3">
+            <label for="password" class="form-label" class="change-font2" style="padding-left:10px;">Mot de passe</label>
+           
+              <input id="password" required type="password" name="password" class="form-control"  [(ngModel)]="user.password">
+            
+          </div>
+
+          <div class="mb-3">
+            <label for="roles"  class="form-label" class="change-font2" style="padding-left:10px;">Role</label>
+           
+            <select  name="roles"  required  multiple  [(ngModel)]="user.roles" class="form-control">
+              <option *ngFor="let rol of role" [ngValue]="rol">
+                {{rol.name}}
+              </option>
+    
+            </select>
+          </div>
+
+          <div class="modal-footer">
+            <div mat-dialog-actions [align]="'end'" >
+              <button mat-raised-button color="primary"  data-bs-dismiss="modal"  >Ajouter</button>
+              <button mat-raised-button color="warn" mat-dialog-close (click)="c('Save click')" >Annuler</button>
+            </div>
+          </div>
+    
+    
+       
+      </form>
+      
+
+  </div>
+</ng-template> 
+-->
+<!--
+<ng-template #contentDetails let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title"> Détails Utilisateur</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label for="username">Nom d'utilisateur
+        </label>
+        <div class="input-group">
+          <input id="userN" class="form-control" readonly  [value]="user.username" >
+        </div>
+        <div class="form-group">
+          <label>E-mail</label>
+          <div class="input-group">
+            <input id="email2" class="form-control" readonly [value]="user.email" >
+          </div>
+      </div>
+     
+      <div class="form-group"  >
+        <label for="roles">Role</label>
+        <div class="input-group"  >
+         
+
+          <div id="lrole" class="form-control" name="role" >
+            <ng-container *ngFor="let i of user.roles;let last=last" >
+              {{i.name}}{{last?'':', '}}
+              </ng-container>
+              
+            </div>
+        </div>
+      </div>
+      
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <div mat-dialog-actions [align]="'end'">
+      <button mat-raised-button color="warn" mat-dialog-close (click)="modal.close('Save click')">Annuler</button>
+    </div>
+    
+  </div>
+</ng-template> -->
+
+
+<ng-template #contentEdit let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title"> Modifier Utilisateur</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="editForm"  novalidate>
+  
+      <div class="form-group">
+        <label for="username">Nom d'utilisateur
+        </label>
+        <div class="input-group">
+          <input formControlName="username" type="text" class="form-control" >
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="email">E-mail</label>
+        <div class="input-group">
+          <input formControlName="email" type="email" class="form-control" >
+        </div>
+      </div>
+     
+      
+      <div class="form-group"  >
+    
+        <label for="roles">Role</label><br>
+            
+            <select formControlName="roles" multiple  required    (ngModel)="user.roles"    id="roles "   class="form-control">
+              <option *ngFor="let rol of roles" [ngValue]="rol" >{{rol.name}}
+              </option>
+              
+            </select> 
+           
+           
+        
+      </div>
+      
+     
+    </form>
+  </div>
+  <div class="modal-footer">
+    <div  mat-dialog-actions [align]="'end'">
+      <button style="margin-right: 3px;  background-color: #05a7a7;" data-dismiss="modal" mat-raised-button color="primary"  (click)="update()"
+          > Enregistrer</button> 
+      <button mat-raised-button color="warn" mat-dialog-close (click)="modal.close('Save click')">Annuler</button>
+    </div>
+  </div>
+</ng-template>
+
+
+
+
+
+
+

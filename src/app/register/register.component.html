@@ -1,0 +1,122 @@
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>            
+<app-header></app-header>
+<div class="col-md-12 row">
+<div id="bottom" class="card card-container">
+<div class="bottom">
+    <form
+      *ngIf="!isSuccessful"
+      name="form"
+      (ngSubmit)="f.form.valid && onSubmit()"
+      #f="ngForm"
+      novalidate
+    >
+    <h2 class="title2">S'inscrire</h2>
+    <div class="form-group">
+      <div class="input-field">
+      <!--<label for="username">Username</label>-->
+      <i class="fa fa-user" aria-hidden="true"></i>
+      <input
+      placeholder="Nom utilisateur"
+          type="text"
+          class="form-control"
+          name="username"
+          [(ngModel)]="form.username"
+          required
+          minlength="9"
+          maxlength="20"
+          #username="ngModel"
+        /></div>
+        <div class="alert-danger" *ngIf="username.errors && f.submitted">
+          <div *ngIf="username.errors.required">Nom utilisateur est obligatoire!</div>
+          <div *ngIf="username.errors.minlength">
+            Nom utilisateur doit contenir au moins 9 caractéres!
+          </div>
+          <div *ngIf="username.errors.maxlength">
+            Nom utilisateur doit contenir au maximum 20 caractéres!
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="input-field">
+        <!--<label for="username">Username</label>-->
+        <i class="fa fa-envelope"></i>
+         <input
+          placeholder="Email"
+          type="email"
+          class="form-control"
+          name="email"
+          [(ngModel)]="form.email"
+          required
+          email
+          #email="ngModel"
+        /></div>
+        <div class="alert-danger" *ngIf="email.errors && f.submitted">
+          <div *ngIf="email.errors.required">Email est obligatoire!</div>
+          <div *ngIf="email.errors.email">
+            Email doit être valide!
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="input-field">
+        <i class="fa fa-lock" aria-hidden="true"></i>
+        <input
+          type="password"
+          class="form-control"
+          name="password"
+          [(ngModel)]="form.password"
+          required
+          minlength="6"
+          #password="ngModel"
+          placeholder="Mot de passe"
+        /></div>
+        <div class="alert-danger" *ngIf="password.errors && f.submitted">
+          <div *ngIf="password.errors.required">Mot de passe est obligatoire!</div>
+          <div *ngIf="password.errors.minlength">
+            Le mot de passe doit contenir au moins 6 caractères!
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="input-field">
+        <i class="fa fa-lock" aria-hidden="true"></i>
+        <input
+          type="password"
+          class="form-control"
+          name="confirmPassword"
+          [(ngModel)]="form.confirmPassword"
+          required
+          minlength="6"
+          #confirmPassword="ngModel"
+          placeholder="Confirmer le mot de passe"
+        /></div>
+        <div class="alert-danger" *ngIf="(confirmPassword.errors && f.submitted )|| (password.value!=confirmPassword.value && f.submitted)">
+          <div *ngIf="confirmPassword.errors.required">Confirmation du mot de passe est obligatoire!</div>
+          <div *ngIf="(password.value!=confirmPassword.value)">
+            pas de correspondence entre les mots de passe!
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="form-group">
+        <button class="btn btn-primary btn-block">Inscription</button>
+      </div>
+
+      <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
+        Inscription échouée!<br />{{ errorMessage }}
+      </div>
+    </form>
+    
+    <div class="alert alert-success" *ngIf="isSuccessful" >
+      Votre Inscription est fait avec succée!
+      <br>
+      <p class="text-center"> <a class="link-style" href="/login" routerLink="/login">Se connecter</a></p>
+    </div> 
+    </div>
+  </div>
+  <img   src="../../assets/images/PNG/third.png" />
+</div>
+

@@ -1,0 +1,61 @@
+<div class="container-fluid">
+    <div class="row">
+        <mat-card class="sidebar content mat-elevation-z8">
+
+            <mat-divider></mat-divider>
+            <button mat-button class="menu-button" *ngFor="let product of products; let i = index">
+                <mat-icon (click)="open(contentDelete, product.id)" [hidden]="showModeratorBoard">delete_forever</mat-icon>
+                <mat-icon [hidden]="showAdminBoard">delete_forever</mat-icon>
+                <button class="product" (click)="getAllProcsById(product.id)">{{ product.name }}</button>
+            </button>
+        
+            <mat-divider></mat-divider>
+            <button mat-button class="menu-button"  (click)="openn(content)"><mat-icon>add</mat-icon>Ajouter </button>
+        </mat-card>
+    
+        <div class="middle">
+          <app-table [data]="data" [id]="id"></app-table>
+    </div>
+</div>
+   
+<ng-template #contentDelete let-c="close" let-modal >
+    <div class="modal-header">
+      <h3 class="modal-title" class="change-position" >Confirmation de la suppression</h3>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body" class="text" style="padding: 10px;">
+      <h2 class="change-font">Êtes-vous sûr de vouloir supprimer ce Produit ?</h2>
+      <div class="modal-footer">
+        <button style="margin-right: 3px;background-color: #05a7a7;" data-dismiss="modal"  mat-raised-button color="primary" (click)="c('yes')">
+            Supprimer</button> 
+      <button mat-raised-button color="warn" (click)="c('Save click')">Annuler</button>
+    </div> </div>
+  </ng-template>
+  
+
+<ng-template #content let-c="close" let-modal>
+    <div class="modal-header" >
+      <h4 class="modal-title" class="change-position" style="font-weight:bold;margin-bottom:2px;font-size:20px" >Ajouter un produit</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body" class="text" >
+      <form [formGroup]="prodDetail" >
+          <div class="mb-3">
+              <label for="name" class="form-label" style="padding-left:10px;padding-top: 10px;" class="change-font2">Nom produit</label>
+              <input required type="text" formControlName="name" class="form-control"  >
+          </div>
+        </form>
+        <div class="modal-footer">
+          <div mat-dialog-actions [align]="'end'" >
+            <button style="margin-right: 3px;background-color: #05a7a7;" mat-raised-button color="primary"
+            data-dismiss="modal" (click)="addProd()">Ajouter</button>
+            <button mat-raised-button color="warn" mat-dialog-close (click)="c('Save click')" >Annuler</button>
+          </div>
+        </div>
+  
+    </div>
+  </ng-template> 

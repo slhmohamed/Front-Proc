@@ -1,0 +1,265 @@
+
+.buttons{
+  right: 20px;
+  top: 20px;
+  position: absolute;
+}
+
+.full-width-table{
+  position: relative;
+  width: 100% !important;
+  height: 100% !important;
+}
+.cont1{
+  margin: 0%;
+  padding: 0%;
+}
+.cont1 .row {
+  width: 100%;
+  padding: 0%;
+  margin: 0%;
+}
+.sel-ic{
+    position: absolute;
+    right: 20px;
+}
+
+
+.s{
+  font-weight: 500;
+  font-size: larger;
+  margin-right: 15%;
+  margin-top: 3%;
+
+}
+
+.search-bar{
+  width:70%;
+}
+
+.ic{
+  width: 30%;
+  position: relative;
+  padding-top: 5%;
+  margin-left: 10%;
+}
+.ajout{
+  position: relative;
+  padding: 0%;
+  width: 60%;
+  height: 60%;
+  margin-top: 6px;
+}
+.row1{
+  width: 100%;
+  padding: 0%;
+  display: flex;
+  margin: 0%;}
+
+.mat-form-field-appearance-standard .mat-form-field-flex{
+  padding-top: 0%;
+}
+.mat-icon, .material-icons{
+  font-size: 30px;
+  height: 34px;
+  width: 34px;
+  padding-top: 3px;
+}
+ .mat-elevation-z8{
+   width: 100%;
+   overflow-y: scroll;
+   overflow-x: scroll;
+   padding: 0%;
+   margin: 0%;
+ }
+ .mat-cell{
+  padding-right: 20px;
+}
+
+/*//////////////*/
+
+
+
+
+
+
+#sidebar{
+  z-index: 1000;
+  position: absolute;
+  right: 0%;
+  background: rgb(241, 242, 245);
+  transition: .6s;
+  width: 50%;
+  border-bottom-left-radius: 5px;
+}#sidebar2{
+  z-index: 900;
+  position: absolute;
+  right: 0%;
+  background: rgb(241, 242, 245);
+  transition: .6s;
+  border-bottom-left-radius: 5px;
+  width:50%;
+}
+.scroll{
+  border: 0.5px solid rgba(0, 0, 0, 0.137);
+  padding: 12px;
+  padding-top: 0;
+  height: 360px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+
+  border-radius: 5px;
+  border-top-left-radius: 0%;
+  display: grid;
+}
+.flex{
+  width: 100%;
+  display: flex;
+}
+.row2 .mat-checkbox{
+  width: 100%;
+}
+.row2 .mat-list-item{
+  list-style: none;
+  color: rgb(39, 41, 44);
+  font-size: 18px;
+}
+.row2 .mat-list-base .mat-list-item, .mat-list-base .mat-list-option {
+  height: 33px;}
+  #sidebar .toggle-btn {
+    border-top-left-radius: 1px;
+    border-bottom-left-radius: 1px;
+    position: absolute;
+    left: -30px;  
+    background: rgb(241, 242, 245);
+    background-image: url("/assets/images/col1.png");
+    width: 30px;
+    height: 140px;
+  }
+  #sidebar2 .toggle-btn {
+    border-top-left-radius: 1px;
+    border-bottom-left-radius: 1px;
+    position: absolute;
+    left: -30px;  
+    top: 150px;
+   background-color: rgb(241, 242, 245);
+    background-image: url("/assets/images/col.png");
+    width: 30px;
+    height: 140px;
+
+  }
+#s{
+size: 50px;  padding-right: 10px;
+  padding-top: 23px;
+}
+.flex mat-form-field{
+  width: 90%;
+}
+.scroll mat-divider{
+  margin: 0 ;
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.row2 .mat-checkbox-inner-container{
+  height: 22px !important;
+  width: 22px !important;
+  padding: 0%;
+}
+#col{
+  padding-left: 25px;
+}
+.toggle-btn span {
+  width: 45px;
+  height: 4px;
+  background: #000;
+  display: block;
+  margin-top: 4px;
+}
+
+#sidebar.active {
+  right: 50%;
+}
+#sidebar2.active {
+  right: 50%;
+}
+.row2{
+  position: absolute;
+  margin-top: 10px;
+  width: 26%;
+  right: -13%;
+  background-color: rgb(137, 40, 40);
+}
+.row5{
+  display: flex;
+  width: 16%;
+  margin-top: 15px;
+  margin-left: 15%;
+}
+.row4{
+  display: flex;
+}
+
+.example-spacer{
+flex: 1 1 auto;
+}
+
+
+.mat-toolbar-row{
+  background-color: white;
+}
+
+div.horizontalgap {
+  float: left;
+  overflow: hidden;
+  height: 1px;
+  width: 0px;
+}
+
+/* adding a new proc */
+
+
+.column {
+  float: left;
+  width: 25%;
+  padding: 10px;
+ 
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.addproc .modal-dialog{
+  overflow-y: initial !important
+}
+.addproc .modal-body{
+  height: 70vh;
+  overflow-y: auto;
+}
+select {
+  -webkit-appearance: menulist;
+
+}
+.rowleft{
+  float: left;
+  width: 45%;
+  padding: 10px;
+
+}
+.rowright{
+  float: right;
+  width: 45%;
+}
+
+.rowdivider{
+  float: left;
+  margin-left: 4.5%;
+}
+.mat-divider-vertical{
+  height: 950px;
+  background-color:#05a7a7;
+}

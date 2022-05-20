@@ -1,0 +1,22 @@
+.example-spacer{
+    flex: 1 1 auto;
+}
+table {
+    width: 100%;
+  }
+
+  #greenbuttom{
+    background-color: #05a7a7;
+    color: white;
+    border:none;
+    border-radius: 1px;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    box-sizing: border-box;
+    line-height: 36px;
+   }
+   .container{
+    max-width:1200px;
+    margin: 0 auto;
+  }  

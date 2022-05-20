@@ -1,0 +1,16 @@
+.example-spacer{
+    flex: 1 1 auto;
+}
+table {
+    width: 100%;
+  }
+
+  #greenbuttom{
+    background-color: #05a7a7;
+    color: white;
+   }
+   .container{
+    max-width:1200px;
+    margin: 0 auto;
+  }  
+  

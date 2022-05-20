@@ -1,0 +1,89 @@
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>  
+<app-header></app-header>
+<div class="col-md-12 row">
+     <img   src="../../assets/images/PNG/third.png" />
+<div id="bottom" class="card card-container">
+<div class="bottom">
+    <form
+      *ngIf="!isLoggedIn"
+      name="form"
+      (ngSubmit)="f.form.valid && onSubmit()"
+      #f="ngForm"
+      novalidate
+    >
+      <h2 class="title2">Se connecter</h2>
+      <div class="form-group">
+        <div class="input-field">
+        <!--<label for="username">Username</label>-->
+        <i class="fa fa-user" aria-hidden="true"></i>
+        <input
+          type="text"
+          placeholder="Nom utilisateur"
+          class="form-control"
+          name="username"
+          [(ngModel)]="form.username"
+          required
+          #username="ngModel"
+        />
+      </div>
+        <div
+          class="alert alert-danger"
+          role="alert"
+          *ngIf="username.errors && f.submitted"
+        >
+          Nom utilisateur est obligatoire!
+        </div>
+      </div>
+      <div class="form-group">
+      <div class="input-field">
+       <!-- <label for="password">Password</label>-->
+       <i class="fa fa-lock" aria-hidden="true"></i>
+        <input
+          type="password"
+          placeholder="Mot de passe"
+          class="form-control"
+          name="password"
+          [(ngModel)]="form.password"
+          required
+          minlength="6"
+          #password="ngModel"
+        />
+      </div>
+        <div
+          class="alert alert-danger"
+          role="alert"
+          *ngIf="password.errors && f.submitted" >
+        <div *ngIf="password.errors.required">Mot de passe est obligatoire!</div>
+        <div *ngIf="password.errors.minlength">
+            Le mot de passe doit contenir au moins 6 caractères!
+        </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary btn-block">
+          Connexion
+        </button>
+      </div>
+      <div class="form-group">
+        <div
+          class="alert alert-danger"
+          role="alert"
+          *ngIf="f.submitted && isLoginFailed"
+        >
+          Connexion échouée: {{ errorMessage }}
+        </div>
+      </div>
+    </form>
+
+    <div class="text-center" *ngIf="!isLoggedIn">
+       <p>Pas de compte? <a href="/register" class="signup" routerLink="/register">S'inscrire</a></p>
+    </div>
+
+    <div class="text-center" *ngIf="!isLoggedIn">
+      <p>Mot de passe oublié? <a href="/recuperate" class="recuperate" routerLink="/recuperate" (click)="openDialog()" >Récupérer</a></p>
+   </div>
+
+    
+  </div>
+</div>
+</div>

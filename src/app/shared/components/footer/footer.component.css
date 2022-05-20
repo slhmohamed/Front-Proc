@@ -1,0 +1,23 @@
+.content{
+
+    float: left;
+
+    padding: 8px;
+
+}
+
+img {
+
+    width:110px;
+
+    height: 20px;
+
+    object-fit:cover;
+
+    border-radius: 50%;
+
+  }
+
+  .mat-divider {
+    display: none;
+}

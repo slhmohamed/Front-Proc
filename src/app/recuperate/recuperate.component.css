@@ -1,0 +1,30 @@
+label {
+  display: block;
+  margin-top: 10px;
+}
+
+.card-container.card {
+  max-width: 400px !important;
+  padding: 40px 40px;
+  width: 100%;
+  margin: 0%;
+}
+
+.dialog{
+  width: 300px;
+  height: 300px;
+  padding: 20px 10px ;
+}
+
+.profile-img-card {
+  width: 96px;
+  height: 96px;
+  margin: 0 auto 10px;
+  display: block;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+}
+.btn{
+ margin-bottom:0% ;
+}

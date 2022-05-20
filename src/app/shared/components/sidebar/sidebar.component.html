@@ -1,0 +1,113 @@
+
+<div>
+    
+    <mat-nav-list>
+
+    <!-- <div class="center">
+ 
+         <img src="assets\img\neoxam.png">
+ 
+     </div>-->
+     <mat-divider></mat-divider>
+     <mat-divider></mat-divider>
+ 
+     <!-- <h2 matSubheader>Pages</h2>-->
+ 
+ <div class="side-list" >
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="dashboard">
+ 
+        <mat-icon> insert_chart</mat-icon>
+
+                Dashboard</a>
+         <mat-accordion [hidden]="collaborateur">
+         <mat-expansion-panel (opened)="panelOpenState = true"
+         (closed)="panelOpenState = false">
+            <mat-expansion-panel-header >
+                <mat-panel-title>
+                    <a mat-list-item routerLinkActive="list-item-active" routerLink="/dashboard">
+                        <mat-icon> build</mat-icon>
+                        Gestion</a>
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+
+
+            
+
+            <a mat-list-item routerLinkActive="list-item-active" routerLink="statut" class="gestion" >
+ 
+                &diams; Statut</a>
+        
+             <a mat-list-item routerLinkActive="list-item-active" routerLink="profilProc" class="gestion">
+         
+                &diams; Profil procédure</a>
+        
+             <a mat-list-item routerLinkActive="list-item-active" routerLink="scrum" class="gestion">
+
+                &diams; Scrum</a>
+                 
+             <a mat-list-item routerLinkActive="list-item-active" routerLink="priorite" class="gestion">
+         
+                  &diams; Priorité</a>
+            
+                  <a mat-list-item routerLinkActive="list-item-active" routerLink="prdSp" class="gestion">
+         
+                    &diams; Type Produit</a>
+        
+             <a mat-list-item routerLinkActive="list-item-active" routerLink="couverture"  class="gestion">
+         
+                &diams; Couverture</a>
+            
+        </mat-expansion-panel> 
+    </mat-accordion>
+     <a mat-list-item routerLinkActive="list-item-active" routerLink="charts">
+ 
+         <mat-icon> multiline_chart</mat-icon>
+ 
+                 Statistique</a>
+
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="users"  [disabled]="collaborateur">
+ 
+         <mat-icon> people</mat-icon>
+            
+                 Utilisateurs</a>
+ 
+ 
+ </div>
+ 
+     <mat-divider></mat-divider>
+
+    
+    <mat-divider></mat-divider>
+    
+ 
+ 
+ 
+     <!--<h2 matSubheader>Tools</h2>
+ 
+ 
+ 
+     <a mat-list-item routerLinkActive="list-item-active" routerLink="/contacts">
+ 
+         <mat-icon>import_contacts</mat-icon>
+ 
+         Contacts
+ 
+     </a>
+ 
+     <a mat-list-item routerLinkActive="list-item-active" routerLink="/contacts">
+         <mat-icon>contact_phone</mat-icon>
+ 
+         Leads
+ 
+     </a>-->
+
+ 
+ </mat-nav-list>
+ </div>
+ <div class="content">
+
+    NEOXAM
+    &copy;Tous droits réservés 2022
+
+
+</div>
